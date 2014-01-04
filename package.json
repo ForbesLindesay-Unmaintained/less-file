@@ -1,0 +1,21 @@
+{
+  "name": "bootstrap-middleware",
+  "version": "0.0.0",
+  "description": "Middleware for twitter bootstrap",
+  "keywords": [],
+  "dependencies": {
+    "promise": "~3.2.0",
+    "express": "~3.4.7",
+    "less": "1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "fail"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ForbesLindesay/bootstrap-middleware.git"
+  },
+  "author": "ForbesLindesay",
+  "license": "MIT"
+}
