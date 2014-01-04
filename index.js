@@ -2,38 +2,60 @@
 
 var path = require('path');
 var express = require('express');
-var parse = require('./lib/parser');
+var compile = require('./lib/compiler');
+var settings = require('./lib/settings.js');
 
 module.exports = less;
+module.exports.settings = settings;
 function less(filename, options) {
+  options = settings.normalize(options || {});
+
   var app = express();
 
-  var files = [];
   app.get('/bundle.css', function (req, res, next) {
-    parse(filename, {
-      //strictMath: true,
-      relativeUrls: false,
-      sourceMap: true,
-      outputSourceFiles: true,
-      getURL: function (filename) {
-        var file = filename.replace(/\\/g, '/').split('/').pop();
-        var fileID = files.indexOf(filename);
-        if (fileID === -1) {
-          fileID = files.length;
-          files.push(filename);
-        }
-        return 'files/' + fileID + '/' + file;
+    compile(filename, options).done(function (result) {
+      res.setHeader('content-type', 'text/css');
+
+      // vary
+      if (!res.getHeader('Vary')) {
+        res.setHeader('Vary', 'Accept-Encoding');
+      } else if (!~res.getHeader('Vary').indexOf('Accept-Encoding')) {
+        res.setHeader('Vary', res.getHeader('Vary') + ', Accept-Encoding');
       }
-    }).done(function (result) {
-      console.dir(result.files);
-      res.type('css');
-      res.send(result.css);
+
+      //check old etag
+      if (req.headers['if-none-match'] === result.md5) {
+        res.statusCode = 304;
+        res.end();
+        return;
+      }
+      
+      //add new etag
+      res.setHeader('ETag', result.md5);
+
+      //add cache control
+      if (options.cache && options.cache !== 'dynamic') {
+        res.setHeader('Cache-Control', options.cache);
+      }
+
+      var buffer = result.raw;
+      //add gzip
+      if (options.gzip && supportsGzip(req)) {
+        res.setHeader('Content-Encoding', 'gzip');
+        buffer = result.gzipped;
+      }
+
+      //set content-length (buffer must always be a buffer)
+      res.setHeader('Content-Length', buffer.length);
+
+      if ('HEAD' === req.method) res.end();
+      else res.end(buffer);
     }, next);
   });
 
   app.get('/files/:fileID/:filename', function (req, res, next) {
-    if (files[req.params.fileID]) {
-      var filename = files[req.params.fileID];
+    var filename;
+    if (filename = compile.file(req.params.fileID)) {
       res.setHeader('X-Server-File-Name', filename);
       res.sendfile(filename);
     } else {
@@ -41,10 +63,11 @@ function less(filename, options) {
     }
   });
 
-  app.use(function (req, res, next) {
-    console.log('404: ' + req.path);
-    next();
-  });
-
   return app;
+}
+
+function supportsGzip(req) {
+  return req.headers
+      && req.headers['accept-encoding']
+      && req.headers['accept-encoding'].indexOf('gzip') !== -1;
 }
