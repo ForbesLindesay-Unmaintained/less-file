@@ -1,7 +1,7 @@
 {
-  "name": "bootstrap-middleware",
+  "name": "less-file",
   "version": "0.0.0",
-  "description": "Middleware for twitter bootstrap",
+  "description": "Middleware for less with npm and static assets support",
   "keywords": [],
   "dependencies": {
     "promise": "~3.2.0",
