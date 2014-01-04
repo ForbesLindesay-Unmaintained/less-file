@@ -13,7 +13,6 @@ function less(filename) {
   var foldersCollection = [];
 
   function visitUrl(node) {
-    console.dir(node);
     if (node.value && node.value.value
      && typeof node.value.value === 'string'
      && node.value.value.indexOf('@') === -1) {
