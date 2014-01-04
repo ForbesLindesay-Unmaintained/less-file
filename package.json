@@ -9,7 +9,9 @@
     "less": "1.5.0",
     "resolve": "~0.6.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "bootstrap": "https://github.com/twbs/bootstrap/archive/v3.0.3.tar.gz"
+  },
   "scripts": {
     "test": "fail"
   },
