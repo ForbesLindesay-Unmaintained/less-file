@@ -7,10 +7,7 @@ var parse = require('./lib/parser');
 module.exports = less;
 function less(filename, options) {
   var app = express();
-  
-  
 
-  var id = 0;
   var files = [];
   app.get('/bundle.css', function (req, res, next) {
     parse(filename, {
@@ -33,6 +30,7 @@ function less(filename, options) {
       res.send(result.css);
     }, next);
   });
+
   app.get('/files/:fileID/:filename', function (req, res, next) {
     if (files[req.params.fileID]) {
       var filename = files[req.params.fileID];
@@ -42,10 +40,11 @@ function less(filename, options) {
       next();
     }
   });
+
   app.use(function (req, res, next) {
     console.log('404: ' + req.path);
     next();
   });
-  
+
   return app;
 }
