@@ -23,6 +23,7 @@
     "mocha": "~1.16.2"
   },
   "scripts": {
+    "pretest": "node build.js",
     "test": "mocha -R spec --timeout 10s"
   },
   "repository": {
