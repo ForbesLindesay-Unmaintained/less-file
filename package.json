@@ -24,7 +24,7 @@
   },
   "scripts": {
     "pretest": "node build.js",
-    "test": "mocha -R spec --timeout 10s"
+    "test": "mocha -R spec --timeout 30s"
   },
   "repository": {
     "type": "git",
