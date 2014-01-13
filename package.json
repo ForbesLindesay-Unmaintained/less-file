@@ -1,6 +1,6 @@
 {
   "name": "less-file",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "Middleware for less with npm and static assets support",
   "keywords": [],
   "dependencies": {
