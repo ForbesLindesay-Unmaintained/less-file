@@ -33,10 +33,11 @@
   "author": "ForbesLindesay",
   "license": "MIT",
   "optionalDependencies": {
-    "mime": "1.2.x",
-    "request": ">=2.12.0",
+    "mime": "~1.2.11",
+    "request": "~2.34.0",
     "mkdirp": "~0.3.5",
-    "clean-css": "2.0.x",
-    "source-map": "0.1.x"
+    "clean-css": "2.1.x",
+    "source-map": "0.1.x",
+    "graceful-fs": "~2.0.3"
   }
 }
