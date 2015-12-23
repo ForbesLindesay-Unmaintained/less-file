@@ -16,8 +16,8 @@ If you think I've missed something, be sure to open an issue or submit a pull re
 If you find it useful, please support me on [gittip](https://www.gittip.com/ForbesLindesay/)
 
 [![Build Status](https://img.shields.io/travis/ForbesLindesay/less-file/master.svg)](https://travis-ci.org/ForbesLindesay/less-file)
-[![Dependency Status](https://img.shields.io/gemnasium/ForbesLindesay/less-file.svg)](https://gemnasium.com/ForbesLindesay/less-file)
-[![NPM version](https://img.shields.io/npm/v/less-file.svg)](http://badge.fury.io/js/less-file)
+[![Dependency Status](https://img.shields.io/david/ForbesLindesay/less-file.svg)](https://david-dm.org/ForbesLindesay/less-file)
+[![NPM version](https://img.shields.io/npm/v/less-file.svg)](https://www.npmjs.com/package/less-file)
 
 ## Usage
 
