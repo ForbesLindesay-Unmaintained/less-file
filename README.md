@@ -1,5 +1,7 @@
 # less-file
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ForbesLindesay/less-file.svg)](https://greenkeeper.io/)
+
 **Middleware for less & express with bonus npm support, sane & simple handling of static assets and sensible defaults for the ultimate in ease of use.**
 
 In addition to the basics, less-file also comews witht he following features out of the box:
